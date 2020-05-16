@@ -1,0 +1,31 @@
+<view>预约时间:{{yyTime}}</view>
+<button class='showBtn' bindtap='showTimeModel'>弹出timeModel</button>
+
+
+<!--日期弹出框-->
+<view class="modal {{timeShow?'modal_show':'modal_hide'}}">
+    <!-- 点击弹出框外部关闭弹出框 -->
+    <view class='modal_cancel' bindtap='modelCancel'></view>
+
+    <!-- 弹出框主体 -->
+    <view class='modal_container'>
+        <!-- 头部显示 -->
+        <view class='modal_header'>
+            <view>预定时间</view>
+            <view class='header_tip'>{{yyDay}}天内的预订</view>
+        </view>
+        <!-- 日期 -->
+        <view class="time">
+            <scroll-view class="time_scroll" scroll-x="true" >
+                <view data-index="{{index}}" bindtap="timeClick" class="scroll_item {{currentTab==index?'time_active':''}}" wx:for="{{timeList}}" wx:key="{{index}}">
+                    <view>{{item.name}}</view>
+                    <view>{{item.date}}</view>
+                </view>
+            </scroll-view>
+        </view>
+        <!-- 时间段 -->
+        <view class='hour'>
+            <view bindtap="hourClick" class="hour_item {{item.isShow?'':'hour_unactive'}} {{hourIndex==index?'hour_active':''}} " wx:for="{{hourList}}" wx:key="{{index}}" data-index="{{index}}" data-isshow="{{item.isShow}}">{{item.hour}}</view>
+        </view>
+    </view>
+</view>
